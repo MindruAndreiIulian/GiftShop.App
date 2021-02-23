@@ -1,0 +1,140 @@
+﻿@inject GiftShop.Domain.DTO.CurrentUser currentUser
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - GiftShop.App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark border-bottom box-shadow  d-flex flex-row justify-content-between">
+            <div class="nav-item d-flex flex-row">
+                <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">
+                    <h1>GiftShopApp</h1>
+                </a>
+                @if (currentUser.IsAuthenticated)
+                {
+                    <p class="text-light ml-4 mt-3">Welcome, @currentUser.FirstName</p>
+                }
+            </div>
+            <div class="container ">
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    
+
+                    <ul class="navbar-nav text-light d-flex justify-content-between align-content-center">
+
+                        <li class="nav-item d-flex flex-row">
+                            <a class="nav-link text-light" asp-action="UserOrders" asp-controller="Orders">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list-ul mr-1 mb-1" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+                                </svg>My Orders
+                            </a>
+
+                            <a class="nav-link text-light" asp-area="" asp-controller="Products" asp-action="Index">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-gift-fill mr-1 mb-1" viewBox="0 0 16 16">
+                                    <path d="M3 2.5a2.5 2.5 0 0 1 5 0 2.5 2.5 0 0 1 5 0v.006c0 .07 0 .27-.038.494H15a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2.038A2.968 2.968 0 0 1 3 2.506V2.5zm1.068.5H7v-.5a1.5 1.5 0 1 0-3 0c0 .085.002.274.045.43a.522.522 0 0 0 .023.07zM9 3h2.932a.56.56 0 0 0 .023-.07c.043-.156.045-.345.045-.43a1.5 1.5 0 0 0-3 0V3zm6 4v7.5a1.5 1.5 0 0 1-1.5 1.5H9V7h6zM2.5 16A1.5 1.5 0 0 1 1 14.5V7h6v9H2.5z" />
+                                </svg>Products
+                            </a>
+
+                            <a class="nav-link text-light" asp-area="" asp-controller="Cart" asp-action="Index">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket-fill mr-1 mb-1" viewBox="0 0 16 16">
+                                    <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z" />
+                                </svg>Cart
+                            </a>
+
+                            <a class="nav-link text-light" asp-area="" asp-controller="Favorite" asp-action="Index">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-suit-heart-fill mr-1" viewBox="0 0 16 16">
+                                    <path d="M4 1c2.21 0 4 1.755 4 3.92C8 2.755 9.79 1 12 1s4 1.755 4 3.92c0 3.263-3.234 4.414-7.608 9.608a.513.513 0 0 1-.784 0C3.234 9.334 0 8.183 0 4.92 0 2.755 1.79 1 4 1z" />
+                                </svg>Favorite
+                            </a>
+
+                            @if (currentUser.IsAdmin && currentUser.IsAuthenticated)
+                            {
+
+
+                                <a class="nav-link text-light" asp-controller="Administrator" asp-action="Index">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-display mr-1 mb-1" viewBox="0 0 16 16">
+                                        <path d="M0 4s0-2 2-2h12s2 0 2 2v6s0 2-2 2h-4c0 .667.083 1.167.25 1.5H11a.5.5 0 0 1 0 1H5a.5.5 0 0 1 0-1h.75c.167-.333.25-.833.25-1.5H2s-2 0-2-2V4zm1.398-.855a.758.758 0 0 0-.254.302A1.46 1.46 0 0 0 1 4.01V10c0 .325.078.502.145.602.07.105.17.188.302.254a1.464 1.464 0 0 0 .538.143L2.01 11H14c.325 0 .502-.078.602-.145a.758.758 0 0 0 .254-.302 1.464 1.464 0 0 0 .143-.538L15 9.99V4c0-.325-.078-.502-.145-.602a.757.757 0 0 0-.302-.254A1.46 1.46 0 0 0 13.99 3H2c-.325 0-.502.078-.602.145z" />
+                                    </svg>Admin
+                                </a>
+
+                            }
+
+               
+
+                        <div id="searchUsers" class="instant-search ml-5">
+                            <div class="instant-search__input-container">
+                                <input id="searchInput" class="instant-search__input" type="text" spellcheck="false" placeholder="Search" />
+                                <i class="material-icons instant-search__icon">search</i>  
+                            </div>
+                            <div class="instant-search__results-container">
+                                
+                                
+                            </div>
+                        </div>
+
+                        </li>
+
+                            @if (currentUser.IsAuthenticated)
+                            {
+
+                                <li class="ml-5">
+                                    <h5><a class="nav-link text-light" asp-action="Logout" asp-controller="Account">Log out</a></h5>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="ml-5">
+                                    <h5 ><a class="nav-link text-light" asp-action="Login" asp-controller="Account">Login</a></h5>
+                                </li>
+
+                                <li>
+                                    <h5 ><a class="nav-link text-light" asp-action="Register" asp-controller="Account">Register</a></h5>
+                                </li>
+                            }
+
+                        </ul>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <footer class="border-top footer text-muted">
+
+        <div class="text-center py-3">
+            &copy; Mîndru Andrei, 2021
+        </div>
+    </footer>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/instant-search.js" type="module"></script>
+    @RenderSection("Scripts", required: false)
+    <link rel="stylesheet" href="~/css/Orders.css" type="text/css" />
+   
+   
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+
+</body>
+</html>

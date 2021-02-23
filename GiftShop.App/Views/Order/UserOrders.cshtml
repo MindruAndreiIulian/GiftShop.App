@@ -1,0 +1,40 @@
+﻿@model List<GiftShop.App.Models.Order.OrderVm>
+
+
+<h1 class="text-light">Orders</h1>
+@if (Model.Count() > 0)
+{
+<p class="text-light">Count: @Model.Count() orders</p>
+<table class="table-light">
+    <tr>
+        <th>Order Number</th>
+        <th>Created Date</th>
+        
+    </tr>
+
+    @foreach (var o in Model)
+    {
+
+        <tr>
+            <td><a asp-controller="Orders" asp-action="ViewOrder" asp-route-orderId="@o.Id" class="btn btn-primary">@o.Id</a></td>
+            <td>@o.CreatedDate  </td>
+           
+        </tr>
+    }
+</table>
+}
+else
+{
+    <div class="d-flex flex-column">
+        <h3 class="text-light">Your orders will be shown here</h3>
+        <a class="btn btn-light w-25" asp-controller="Home" asp-action="Index">Back to home</a>
+    </div>
+  
+}
+
+
+
+
+
+
+

@@ -1,0 +1,69 @@
+﻿@model GiftShop.App.Models.Order.CartVm
+<div class="cart-page cart-page-container container-fluid align-items-center card d-flex flex-column ">
+    <h1 class="mb-5 mt-5 border-bottom">Shopping cart</h1>
+
+    <div class="container-fluid d-flex align-items-center justify-content-center">
+        @if (Model.Products.Count() != 0)
+        {
+            <div class="w-100">
+
+                @for (int i = 0; i < Model.Products.Count(); i++)
+                {
+                    <div class="d-flex justify-content-between align-items-center text-center border-top">
+                        <div class="w-20 d-flex flex-row justify-content-center align-items-center">
+                            <div class="mr-3" id="addToFav">
+                                <div id="productId" style="display:none">@Model.Products.ElementAt(i).Id</div>
+                                <svg class="heart" version="1.1" viewBox="0 0 512 512" width="512px" xml:space="preserve" stroke="#727272" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><path d="M340.8,98.4c50.7,0,91.9,41.3,91.9,92.3c0,26.2-10.9,49.8-28.3,66.6L256,407.1L105,254.6c-15.8-16.6-25.6-39.1-25.6-63.9  c0-51,41.1-92.3,91.9-92.3c38.2,0,70.9,23.4,84.8,56.8C269.8,121.9,302.6,98.4,340.8,98.4 M340.8,83C307,83,276,98.8,256,124.8  c-20-26-51-41.8-84.8-41.8C112.1,83,64,131.3,64,190.7c0,27.9,10.6,54.4,29.9,74.6L245.1,418l10.9,11l10.9-11l148.3-149.8  c21-20.3,32.8-47.9,32.8-77.5C448,131.3,399.9,83,340.8,83L340.8,83z" stroke="#727272" /></svg>
+                            </div>
+                             
+                            <a class="removeAll" asp-controller="Cart" asp-action="RemoveAll" asp-route-productId="@Model.Products.ElementAt(i).Id">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                </svg>
+                            </a>
+                        </div>
+
+                        <div class="w-20 d-flex flex-row justify-content-between align-items-center">
+                            <img class="cart-img" src="/Media/GetImage/@Model.Products.ElementAt(i).MediaId" alt="Imagine indisponibila" />
+
+                        </div>
+
+                        <h5 class="w-20">@Model.Products.ElementAt(i).Price RON</h5>
+                        <h5 class="w-20">@Model.Products.ElementAt(i).Name</h5>
+
+                        <div class="w-20 d-flex flex-row justify-content-center align-items-center">
+                            <a class="btn-sm btn-dark mr-2" asp-action="AddOneToCart" asp-controller="Cart" asp-route-productid="@Model.Products.ElementAt(i).Id" id="addButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+                                    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                                </svg>
+                            </a>
+                            <h5 class="w-20">@Model.OrderItems.ElementAt(i).Quantity</h5>
+                            <a class="btn-sm btn-dark ml-2" asp-action="RemoveFromCart" asp-controller="Cart" asp-route-productid="@Model.Products.ElementAt(i).Id" id="removeButton">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash" viewBox="0 0 16 16">
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z" />
+                                </svg>
+                            </a>
+
+                        </div>
+                    </div>
+                }
+
+                <div class="d-flex flex-column justify-content-center align-content-center  mt-5 mb-5">
+                    <h3><span class="text-danger">Total de plata: </span>@Model.Total RON </h3>
+                    <a asp-controller="Orders" asp-action="FinishOrder" asp-route-orderId="@Model.Id" class="btn btn-dark finishButton">Finalizare comanda</a>
+                </div>
+            </div>
+
+        }
+        else
+        {
+            <div class="w-20 d-flex flex-column justify-content-center align-items-center">
+                <h3 class="">Your cart items will be shown here</h3>
+                <a class="btn btn-dark" asp-controller="Products" asp-action="Index">Back To Products</a>
+            </div>
+        }
+    </div>
+</div>
+
+<link href="~/css/Cart.css" rel="stylesheet" />
+<script src="~/js/Cart.js"></script>

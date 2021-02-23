@@ -1,0 +1,36 @@
+﻿@model GiftShop.App.Models.Order.OrderVm
+
+<div class="card favorite-container d-flex flex-column justify-content-center align-items-center">
+    <h1 class="mb-5 mt-5 border-bottom">Order number @Model.Id</h1>
+
+    <div class="row m-5">
+        @foreach (var oi in Model.ProductQty)
+        {
+            <div class='product--blue'>
+                <div class='product_inner'>
+                    <img src='/Media/GetImage/@oi.Key.MediaId' width='300'>
+                    <p>@oi.Key.Name</p>
+                    <p>Ordered Quantity: @oi.Value</p>
+                    <p>Price @oi.Key.Price RON</p>
+                    @if (oi.Key.isDeleted != true)
+                    {
+                        <a asp-controller="Products" asp-action="ProductPage" asp-route-productId="@oi.Key.Id">See Details</a>
+                    }
+                    else
+                    {
+                        <a class="align-items-center"  href="#">Out of stock</a>
+                    }
+                </div>
+                <div class='product_overlay'>
+                    <h2>Added to cart</h2>
+                    <i class='fa fa-check'></i>
+                </div>
+            </div>
+        }
+    </div>
+    <h1>Total: @Model.Total RON</h1>
+</div>
+
+
+<script src="~/js/ViewOrder.js"></script>
+<link href="~/css/ViewOrder.css" rel="stylesheet" />

@@ -1,0 +1,42 @@
+﻿@model GiftShop.App.Models.Product.ProductVm
+@{
+    Layout = "_Admin_Layout";
+}
+
+
+<div class="row w-100 mt-5 d-flex flex-column justify-content-center align-content-center">
+    <h3>Update Product</h3>
+    @if (Model.IsOkay == true)
+    {
+        <p class="text-success">@Model.DisplayMessage</p>
+    }
+    else
+    {
+        <p class="text-danger">@Model.DisplayMessage</p>
+    }
+    <form class="form-group p-4 col-md-6 card" enctype="multipart/form-data" asp-controller="Administrator" asp-action="UpdateProduct">
+
+
+        <input asp-for="Id" hidden />
+
+        <label class="form-check-label">Name</label>
+        <input class="form-control" asp-for="Name" value="@Model.Name" type="text" required/>
+
+        <label class="form-check-label">Description</label>
+        <textarea class="form-control" asp-for="Description" value="@Model.Description" type="text" rows="5"></textarea>
+
+        <label class="form-check-label">Price</label>
+        <input class="form-control" asp-for="Price" type="number" value="@Model.Price" step="0.01" required/>
+
+        <label class="form-check-label">Stock number</label>
+        <input class="form-control" asp-for="StockNumber" value="@Model.StockNumber" type="number" required/>
+
+        <label asp-for="StockNumber">Add Image</label>
+        <input class="form-control" accept="image/x-png,image/gif,image/jpeg" asp-for="MediaVm.File" />
+
+        <input type="submit" value="Save" class="btn btn-primary" />
+
+    </form>
+</div>
+
+

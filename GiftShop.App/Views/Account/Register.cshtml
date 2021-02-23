@@ -1,0 +1,40 @@
+﻿@model GiftShop.App.Models.Account.RegisterVm
+
+<div id="login-box">
+    <div class="left">
+        <h1>Sign up</h1>
+        <form asp-controller="Account" asp-action="Register">
+            <input type="email" aria-describedby="emailHelp" asp-for="Email" name="email" placeholder="E-mail" required />
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <input type="password" asp-for="Password" name="password" placeholder="Password" required />
+
+            <input type="text" asp-for="FirstName" placeholder="First Name" required />
+            <input type="text" asp-for="LastName" placeholder="Last Name" required />
+            <br />
+            <p>Gender</p>
+            <div class="d-flex flex-row">
+                <label class="ml-3" asp-for="GenderId">Male</label>
+                <input  type="radio" asp-for="GenderId" name="GenderId" value="1">
+
+                <label class="ml-3" asp-for="GenderId">Female</label>
+                <input  type="radio" asp-for="GenderId" name="GenderId" value="2"> 
+
+                <label class="ml-3" asp-for="GenderId">Other</label>
+                <input  type="radio" asp-for="GenderId" name="GenderId" value="3">
+            </div>
+            <br />
+
+            @if (Model.IsInvalid)
+            {
+                <p class="text-danger">@Model.ErrorMessage</p>
+            }
+            <input type="submit" name="signup_submit" value="Sign me up" />
+        </form>
+    </div>
+    <div class="right">
+        <img src="https://images.unsplash.com/photo-1509024102370-fd7802f4a7a7?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" />
+    </div>
+
+</div>
+
+<link href="~/css/Register.css" rel="stylesheet" />

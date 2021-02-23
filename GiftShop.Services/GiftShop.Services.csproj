@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\GiftShop.Common\GiftShop.Common.csproj" />
+    <ProjectReference Include="..\GiftShop.DataAccess\GiftShop.DataAccess.csproj" />
+  </ItemGroup>
+
+</Project>

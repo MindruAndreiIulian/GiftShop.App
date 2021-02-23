@@ -1,0 +1,47 @@
+﻿@{ Layout = "_Layout"; }
+@model GiftShop.App.Models.Order.FinishOrderVm
+
+<div id="login-box">
+    <div class="left">
+        <h1>Details</h1>
+        <form asp-controller="Orders" asp-action="FinishOrder">
+            <input asp-for="User.Id" value="@Model.User.Id" hidden />
+            <input asp-for="User.Email" value="@Model.User.Email" hidden />
+
+            <label class="form-check-label">First Name</label>
+            <input class="form-control" asp-for="User.FirstName" value="@Model.User.FirstName" type="text" required />
+
+            <label class="form-check-label">Last Name</label>
+            <input class="form-control" asp-for="User.LastName" value="@Model.User.LastName" type="text" required />
+
+            <label class="form-check-label">Address</label>
+            <input class="form-control" asp-for="User.Address" value="@Model.User.Address" type="text" required />
+
+
+
+            <input asp-for="Cart.OrderItems" value="@Model.Cart.OrderItems" hidden />
+            <input asp-for="Cart.Products" value="@Model.Cart.Products" hidden />
+            <input asp-for="Cart.Total" value="@Model.Cart.Total" hidden />
+            <input asp-for="Cart.Id" value="@Model.Cart.Id" hidden />
+
+
+            <input type="submit" value="Finish Order" class="btn btn-primary" />
+        </form>
+    </div>
+    <div class="right d-flex flex-column">
+        @foreach(var p in Model.Cart.Products)
+        {
+            <div class="product-box d-flex flex-column">
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <img src="/Media/GetImage/@p.MediaId" alt="image" />
+                    <h6>@p.Name</h6><br />
+                </div>
+                    <p >Price: @p.Price RON<p>
+                    <h6>Quantity: @Model.Cart.OrderItems.Where(oi => oi.ProductId == p.Id).Select(oi => oi.Quantity).FirstOrDefault()</h6>
+            </div>
+        }
+        <h4 class="text-info">ORDER TOTAL: @Model.Cart.Total RON</h4>
+    </div>
+
+</div>
+<link href="~/css/FinishOrder.css" rel="stylesheet" />

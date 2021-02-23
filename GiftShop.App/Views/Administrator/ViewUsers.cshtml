@@ -1,0 +1,77 @@
+﻿@model List<GiftShop.App.Models.User.UserVm>
+@{
+    Layout = "_Admin_Layout";
+}
+
+
+<h1>Users</h1>
+<p>Showing @Model.Count() users</p>
+
+<table>
+    <tr>
+        <th>User ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+    </tr>
+    @foreach (var u in Model)
+    {
+
+<tr class="userRow"> 
+    <td id="userId">@u.Id</td>
+    <td>@u.FirstName @u.LastName</td>
+    <td>@u.Email</td>
+    <td id="userRow">
+        <tc>
+            <label for="userRole">Administrator</label>
+            @if (u.roleId == 3)
+            {
+                <input type="radio" checked id="userRole" value="3" name="userRole_@u.Id" />
+            }
+            else
+            {
+                <input type="radio" id="userRole" value="3" name="userRole_@u.Id"/>
+            }
+        </tc>
+        <tc>
+            <label for="userRole">Accountant</label>
+            @if (u.roleId == 2)
+            {
+                <input type="radio" checked id="userRole" value="2" name="userRole_@u.Id"/>
+            }
+            else
+            {
+                <input type="radio" id="userRole" value="2" name="userRole_@u.Id"/>
+            }
+        </tc>
+        <tc>
+            <label for="userRole">User</label>
+            @if (u.roleId == 1)
+            {
+                <input type="radio" checked id="userRole" value="1" name="userRole_@u.Id"/>
+            }
+            else
+            {
+                <input type="radio" id="userRole" value="1" name="userRole_@u.Id"/>
+            }
+        </tc>
+    </td>
+
+
+    @*@if (@u.roleId == 3)
+    {
+        <td>Administrator</td>
+    }
+    else if (@u.roleId == 2)
+    {
+        <td>Contabil</td>
+    }
+    else if (@u.roleId == 1)
+    {
+        <td>User</td>
+    }*@
+</tr>
+
+
+    }
+</table>

@@ -1,0 +1,66 @@
+﻿@model GiftShop.App.Models.Product.ProductListVm
+
+
+
+<h5 class="text-light">Products: @Model.ProductList.Count()</h5>
+<div class="dropdown">
+    <button class="btn btn-light" type="button" id="filters" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-funnel" viewBox="0 0 16 16">
+            <path d="M1.5 1.5A.5.5 0 0 1 2 1h12a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.128.334L10 8.692V13.5a.5.5 0 0 1-.342.474l-3 1A.5.5 0 0 1 6 14.5V8.692L1.628 3.834A.5.5 0 0 1 1.5 3.5v-2zm1 .5v1.308l4.372 4.858A.5.5 0 0 1 7 8.5v5.306l2-.666V8.5a.5.5 0 0 1 .128-.334L13.5 3.308V2h-11z" />
+        </svg>
+        Filters
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <button id="alphabetical" class="dropdown-item">Alphabetical</button>
+        <button id="highestPrice" class="dropdown-item">Highest Price</button>
+        <button id="lowestPrice" class="dropdown-item">Lowest Price</button>
+    </div>
+</div>
+
+    <div class="row products">
+        @foreach (var p in Model.ProductList)
+        {
+
+            <div id="productItem" class="box-wrapper col-sm-6 col-md-2 ml-5">
+                <img src="/Media/GetImage/@p.MediaId" alt="rhcp" />
+                <div class="box-content">
+                    <a class="buy" asp-controller="Products" asp-action="ProductPage" asp-route-productid="@p.Id">
+                        <span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-basket-fill mb-4" viewBox="0 0 16 16">
+                                <path d="M5.071 1.243a.5.5 0 0 1 .858.514L3.383 6h9.234L10.07 1.757a.5.5 0 1 1 .858-.514L13.783 6H15.5a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v5a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V9H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 6h1.717L5.07 1.243zM3.5 10.5a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3zm2.5 0a.5.5 0 1 0-1 0v3a.5.5 0 0 0 1 0v-3z" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a class="alink"></a>
+                    <div id="productName" class="title">@p.Name</div>
+                    @if (p.Description.Length > 20)
+                    {
+                        <div class="desc"> @p.Description.Substring(0, 20) ... </div>
+                    }
+                    else
+                    {
+                        <div class="desc"> @p.Description </div>
+                    }
+                    <h6 id="productPrice" class="price">@p.Price RON</h6>
+                    <div class="product-footer d-flex flex-row justify-content-between">
+                        @if (p.StockNumber > 0)
+                        {
+                            <p class="text-success">In stock</p>
+                        }
+                        else
+                        {
+                            <p class="text-danger"></p>
+                        }
+
+                    </div>
+                </div>
+                <div class="success"></div>
+            </div>
+
+        }
+
+    </div>
+
+
+<script src="~/js/Products.js"></script>
+<link href="~/css/Products.css" rel="stylesheet" />

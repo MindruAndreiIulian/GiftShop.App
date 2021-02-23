@@ -1,0 +1,35 @@
+﻿@model List<GiftShop.App.Models.Order.OrderVm>
+@{ 
+    Layout = "_Admin_Layout";
+}
+
+<h1>Orders</h1>
+<p>Count: @Model.Count() orders</p>
+
+<table>
+    <tr>
+        <th>Order ID</th>
+        <th>Created Date</th>
+        <th>User ID</th>
+        <th>Status</th>
+    </tr>
+    @foreach (var o in Model)
+    {
+
+        <tr>
+            <td>@o.Id</td>
+            <td>@o.CreatedDate  </td>
+            <td>@o.userName</td>
+            <td>@o.IsFinished</td>
+        </tr>
+        
+    
+    }
+</table>
+
+
+
+
+
+
+

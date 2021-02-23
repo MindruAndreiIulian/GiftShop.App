@@ -1,0 +1,108 @@
+﻿@charset "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,300,500,700);
+
+.order-container {
+    min-height: 600px;
+}
+
+body {
+    font-family: "Raleway" !important;
+}
+
+.row {
+    width: 100%;
+    justify-content: flex-start;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.product, .product--blue {
+    box-shadow: 1px 5px 15px #CCC;
+    width: 5em;
+    height: auto;
+    border-radius: 3px;
+    padding: 2em;
+    margin: 1em;
+    overflow: hidden;
+    position: relative;
+    flex: auto;
+}
+
+.product--blue {
+    background: white;
+}
+
+
+    .product img, .product--blue img {
+        width: 200px;
+        height: 200px;
+        text-align: center;
+    }
+
+.product_inner {
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+    .product_inner p {
+        color: gray;
+    }
+
+    .product_inner a {
+        border: 1px solid rgba(255, 255, 255, 0.5);
+        color: black;
+        text-decoration:none;
+        border-radius: 3px;
+        padding: 1em 3em;
+        margin: 1em 0 0 0;
+        background: lightgray;
+        cursor: pointer;
+        transition: background ease-in 0.25s;
+    }
+
+        .product_inner a:hover {
+            background: black;
+            color: white;
+            text-decoration: none;
+        }
+
+        .product_inner button:before {
+            font-family: FontAwesome;
+            content: "";
+            color: #FFF;
+            position: absolute;
+            font-size: 1.5em;
+            margin: 0 -1.5em;
+        }
+
+        .product_inner a:hover:before {
+            color: #2B2D42;
+        }
+
+.product_overlay {
+    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-500px);
+    opacity: 0;
+    display: flex;
+    flex-flow: column wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+    .product_overlay h2 {
+        color: rgba(43, 45, 66, 0.7);
+        font-size: 1.2em;
+        margin: 1em 0;
+    }
+
+    .product_overlay i {
+        color: rgba(43, 45, 66, 0.7);
+        font-size: 1.5em;
+    }

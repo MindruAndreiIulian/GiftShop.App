@@ -1,0 +1,35 @@
+﻿.carousel-inner .item img {
+    height: 500px;
+    min-width: 100vh;
+    border-radius:5px;
+}
+
+.timer-container {
+    background-image: url(https://images.unsplash.com/photo-1608539660846-1b4990ac8b3c?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1402&q=80);
+    color: white;
+    text-shadow: 0 0 7px #060606, 0 0 6px #000011;
+    width: 100%;
+    height: 30vh;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+}
+
+    .timer-container:after {
+        border-radius: 5px;
+        position: absolute;
+        content: " ";
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        background-color: #00000021;
+    }
+
+#timer {
+    color: #fff;
+    font-size: 2rem;
+}
+
