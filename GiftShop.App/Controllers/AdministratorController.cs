@@ -32,7 +32,7 @@ namespace GiftShop.App.Controllers
             _userService = userService;
         }
 
-        public IActionResult ChangeUserRole(int userId, int roleId)
+        public IActionResult ChangeUserRole(Guid userId, int roleId)
         {
             if (!_currentUser.IsAdmin || !_currentUser.IsAuthenticated)
                 return ForbiddenView();
@@ -70,7 +70,7 @@ namespace GiftShop.App.Controllers
         }
 
 
-        public IActionResult RemoveUserRole(int userId, int roleId)
+        public IActionResult RemoveUserRole(Guid userId, int roleId)
         {
             if (!_currentUser.IsAdmin || !_currentUser.IsAuthenticated)
                 return ForbiddenView();

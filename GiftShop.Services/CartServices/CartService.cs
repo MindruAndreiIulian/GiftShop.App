@@ -30,7 +30,7 @@ namespace GiftShop.Services.CartServices
             return orderItems;
         }
 
-        public Order GetCart(int userId)
+        public Order GetCart(Guid userId)
         {
             var cart = _unitOfWork.Order.Query.Include(o => o.OrderItems).Where(o => o.UserId == userId && o.IsFinished == false).FirstOrDefault();
             if (cart == null) {
@@ -43,7 +43,7 @@ namespace GiftShop.Services.CartServices
             return cart; 
         }
 
-        public bool AddProductToCart(int itemId, int userId)
+        public bool AddProductToCart(int itemId, Guid userId)
         {
             
             var cart = _unitOfWork.Order.Query.Include(o => o.OrderItems).Where(o => o.UserId == userId && o.IsFinished == false).FirstOrDefault();
@@ -77,7 +77,7 @@ namespace GiftShop.Services.CartServices
             return _unitOfWork.SaveChanges();
         }
 
-        public bool RemoveProduct(int productId, int userId, int qty)
+        public bool RemoveProduct(int productId, Guid userId, int qty)
         {
             var cart = _unitOfWork.Order.Query.Include(o => o.OrderItems).Where(o => o.UserId == userId && o.IsFinished == false).FirstOrDefault();
             var item = _unitOfWork.Product.Query.FirstOrDefault(p => p.Id == productId);
@@ -101,7 +101,7 @@ namespace GiftShop.Services.CartServices
             return _unitOfWork.SaveChanges();
         }
 
-        public bool IncreaseCartQty(int productId, int userId)
+        public bool IncreaseCartQty(int productId, Guid userId)
         {
             var cart = _unitOfWork.Order.Query.Include(o => o.OrderItems).Where(o => o.UserId == userId && o.IsFinished == false).FirstOrDefault();
             var item = _unitOfWork.Product.Query.FirstOrDefault(p => p.Id == productId);

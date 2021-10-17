@@ -11,7 +11,7 @@ namespace GiftShop.App.Models.Order
     public class OrderVm
     {
         public int Id { get; set; }
-        public int? UserId { get; set; }
+        public Guid? UserId { get; set; }
         public string userName { get; set; }
         public bool IsFinished { get; set; }
         public DateTime CreatedDate { get; set; }

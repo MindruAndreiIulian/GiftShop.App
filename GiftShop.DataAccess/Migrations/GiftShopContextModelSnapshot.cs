@@ -20,10 +20,27 @@ namespace GiftShop.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.2");
 
+            modelBuilder.Entity("GiftShop.DataAccess.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("ID")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("GiftShop.DataAccess.Entities.FavoriteProduct", b =>
                 {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("ProductId")
                         .HasColumnType("int");
@@ -65,8 +82,8 @@ namespace GiftShop.DataAccess.Migrations
                     b.Property<bool>("IsFinished")
                         .HasColumnType("bit");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -109,6 +126,12 @@ namespace GiftShop.DataAccess.Migrations
                         .HasColumnName("ID")
                         .UseIdentityColumn();
 
+                    b.Property<bool>("CategoryId")
+                        .HasColumnType("bit");
+
+                    b.Property<int?>("CategoryId1")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -129,6 +152,8 @@ namespace GiftShop.DataAccess.Migrations
                         .HasColumnType("tinyint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("CategoryId1");
 
                     b.HasIndex("MediaId")
                         .IsUnique()
@@ -154,11 +179,10 @@ namespace GiftShop.DataAccess.Migrations
 
             modelBuilder.Entity("GiftShop.DataAccess.Entities.User", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("ID")
-                        .UseIdentityColumn();
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ID");
 
                     b.Property<string>("Address")
                         .HasMaxLength(50)
@@ -196,13 +220,14 @@ namespace GiftShop.DataAccess.Migrations
 
             modelBuilder.Entity("GiftShop.DataAccess.Entities.UsersRole", b =>
                 {
-                    b.Property<int?>("RoleId")
+                    b.Property<int>("RoleId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("RoleId", "UserId");
+                    b.HasKey("RoleId", "UserId")
+                        .IsClustered(false);
 
                     b.HasIndex("UserId");
 
@@ -214,7 +239,9 @@ namespace GiftShop.DataAccess.Migrations
                     b.HasOne("GiftShop.DataAccess.Entities.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
-                        .HasConstraintName("FK__Orders__UserId__3E52440B");
+                        .HasConstraintName("FK__Orders__UserId__3E52440B")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
@@ -238,9 +265,15 @@ namespace GiftShop.DataAccess.Migrations
 
             modelBuilder.Entity("GiftShop.DataAccess.Entities.Product", b =>
                 {
+                    b.HasOne("GiftShop.DataAccess.Entities.Category", "Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryId1");
+
                     b.HasOne("GiftShop.DataAccess.Entities.Media", "Media")
                         .WithOne("Product")
                         .HasForeignKey("GiftShop.DataAccess.Entities.Product", "MediaId");
+
+                    b.Navigation("Category");
 
                     b.Navigation("Media");
                 });
@@ -264,6 +297,11 @@ namespace GiftShop.DataAccess.Migrations
                     b.Navigation("Role");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("GiftShop.DataAccess.Entities.Category", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("GiftShop.DataAccess.Entities.Media", b =>

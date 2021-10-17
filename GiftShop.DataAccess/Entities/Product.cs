@@ -20,7 +20,9 @@ namespace GiftShop.DataAccess.Entities
 
         public int? MediaId { get; set; }
         public bool? IsDeleted { get; set; }
+        public bool CategoryId { get; set; }
 
+        public Category Category { get; set; }
         public virtual ICollection<OrderItem> OrderItems { get; set; }
         public virtual Media Media { get; set; }
     }

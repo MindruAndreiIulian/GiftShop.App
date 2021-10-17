@@ -11,7 +11,8 @@ namespace GiftShop.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<UsersRole> builder)
         {
-            builder.HasKey(ur => new { ur.RoleId, ur.UserId });
+            builder.HasKey(ur => new { ur.RoleId, ur.UserId })
+                .IsClustered(false);
 
             builder.HasOne(d => d.Role)
                 .WithMany()

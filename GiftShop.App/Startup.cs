@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Http;
 using GiftShop.DataAccess.Context;
 using Microsoft.EntityFrameworkCore;
 using GiftShop.DataAccess.UnitOfWork;
+using GiftShop.Services.Users;
 
 namespace GiftShop.App
 {
@@ -41,7 +42,7 @@ namespace GiftShop.App
 
             services.AddDbContext<GiftShopContext>(options =>
             {
-                options.UseSqlServer("Server=AMINDRU;Database=GiftShop;Trusted_Connection=True;");
+                options.UseSqlServer("Server=AMINDRU;Database=GiftShop-v2-dev;Trusted_Connection=True;");
             });
 
             services.AddScoped<GiftShopUnitOfWork>();
@@ -88,6 +89,20 @@ namespace GiftShop.App
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
+            InitializeDatabase(app);
+        }
+
+        private void InitializeDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetService<IServiceScopeFactory>().CreateScope())
+            {
+                var scopeServiceProvider = serviceScope.ServiceProvider;
+                var userService = scopeServiceProvider.GetRequiredService<UserService>();
+                var db = scopeServiceProvider.GetService<GiftShopContext>();
+                db.Database.Migrate();
+
+                DbInitializer.Initialize(db, userService);
+            }
         }
     }
 }

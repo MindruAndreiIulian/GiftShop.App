@@ -28,13 +28,14 @@ namespace GiftShop.DataAccess.Context
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UsersRole> UsersRoles { get; set; }
         public virtual DbSet<Media> Media { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 
-                optionsBuilder.UseSqlServer("Server=AMINDRU;Database=GiftShop;Trusted_Connection=True;");
+                optionsBuilder.UseSqlServer("Server=AMINDRU;Database=GiftShop-v2-dev;Trusted_Connection=True;");
             }
         }
 
@@ -53,6 +54,8 @@ namespace GiftShop.DataAccess.Context
             modelBuilder.ApplyConfiguration(new UserConfiguration());
 
             modelBuilder.ApplyConfiguration(new UsersRoleConfiguration());
+
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
 
             OnModelCreatingPartial(modelBuilder);
         }

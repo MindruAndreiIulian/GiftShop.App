@@ -3,6 +3,7 @@ using GiftShop.DataAccess.Entities;
 using GiftShop.DataAccess.UnitOfWork;
 using GiftShop.Services.Base;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -94,7 +95,7 @@ namespace GiftShop.Services.Users
             return _unitOfWork.User.Query.FirstOrDefault(u => u.Email == email);
         }
 
-        public User GetUserById(int id)
+        public User GetUserById(Guid id)
         {
             return _unitOfWork.User.Query.FirstOrDefault(u => u.Id == id);
         }

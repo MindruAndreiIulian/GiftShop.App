@@ -3,6 +3,7 @@ using GiftShop.DataAccess.Context;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace GiftShop.DataAccess.Base
 {
@@ -26,6 +27,20 @@ namespace GiftShop.DataAccess.Base
             try
             {
                 return context.SaveChanges() != 0;
+            }
+            catch(Exception ex)
+            {
+                //to do 
+                //write in a log file
+                return false;
+            }
+        }
+        
+        public async Task<bool> SaveChangesAsync()
+        {
+            try
+            {
+                return await context.SaveChangesAsync() != 0;
             }
             catch(Exception ex)
             {

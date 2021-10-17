@@ -34,7 +34,7 @@ namespace GiftShop.Services.FavoriteServices
             return _unitOfWork.SaveChanges();
         }
 
-        public IEnumerable<Product> GetFavoriteProducts(int userId)
+        public IEnumerable<Product> GetFavoriteProducts(Guid userId)
         {
             var favProducts = _unitOfWork.FavProduct.Query.Where(fp => fp.UserId == userId).ToList();
             var products = new List<Product>();

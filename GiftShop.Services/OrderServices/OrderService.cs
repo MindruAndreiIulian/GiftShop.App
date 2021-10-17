@@ -64,7 +64,7 @@ namespace GiftShop.Services.OrderServices
             return sum;
         }
        
-        public IEnumerable<Order> GetOrdersByUserId(int id)
+        public IEnumerable<Order> GetOrdersByUserId(Guid id)
         {
             return _unitOfWork.Order.Query.Include(o => o.OrderItems).Where(o => o.UserId == id).ToList();
         }
